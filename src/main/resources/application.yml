@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: SPRING_APPLICATION_NAME
+
+  datasource:
+    url: SPRING_DATASOURCE_URL
+    username: SPRING_DATASOURCE_USERNAME
+    password: SPRING_DATASOURCE_PASSWORD
+    driver-class-name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+
+  jpa:
+    hibernate:
+      ddl-auto: SPRING_JPA_HIBERNATE_DDL_AUTO
+
+    show-sql: SPRING_JPA_SHOW_SQL
+
+springdoc:
+  api-docs:
+    path: SPRINGDOC_API_DOCS_PATH
+
+  swagger-ui:
+    path: SPRINGDOC_SWAGGER_UI_PATH
+
+security-jwt:
+  private-key: SECURITY_JWT_PRIVATE_KEY
+  public-key: SECURITY_JWT_PUBLIC_KEY
+  ttl: SECURITY_JWT_TTL
+
+  elasticsearch:
+    uris: SECURITY_JWT_ELASTICSEARCH_URIS
+    username: SECURITY_JWT_ELASTICSEARCH_USERNAME
+    password: SECURITY_JWT_ELASTICSEARCH_PASSWORD
