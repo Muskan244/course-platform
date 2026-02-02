@@ -3,6 +3,11 @@ package com.assignment.course_platform.controller;
 import com.assignment.course_platform.dto.responses.EnrollmentResponseDto;
 import com.assignment.course_platform.exception.ResourceNotFoundException;
 import com.assignment.course_platform.service.EnrollmentService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,6 +27,10 @@ public class EnrollmentController {
         this.enrollmentService = enrollmentService;
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Successfully Enrolled",
+                content = @Content(schema = @Schema(implementation = EnrollmentResponseDto.class)))
+    })
     @PostMapping("/{courseId}/enroll")
     public ResponseEntity<EnrollmentResponseDto> enrollUser(@AuthenticationPrincipal Jwt jwt, @PathVariable String courseId) throws ResourceNotFoundException {
         return ResponseEntity

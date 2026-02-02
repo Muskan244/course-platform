@@ -1,11 +1,16 @@
 package com.assignment.course_platform.controller;
 
 import com.assignment.course_platform.dto.responses.EnrollmentProgressResponseDto;
+import com.assignment.course_platform.dto.responses.EnrollmentResponseDto;
 import com.assignment.course_platform.dto.responses.SubtopicProgressResponseDto;
 import com.assignment.course_platform.exception.EnrollmentAccessDeniedException;
 import com.assignment.course_platform.exception.NotEnrolledException;
 import com.assignment.course_platform.exception.ResourceNotFoundException;
 import com.assignment.course_platform.service.SubtopicProgressService;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.constraints.Positive;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +32,10 @@ public class SubtopicProgressController {
         this.subtopicProgressService = subtopicProgressService;
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Successfully completed subtopic",
+                    content = @Content(schema = @Schema(implementation = SubtopicProgressResponseDto.class)))
+    })
     @PostMapping("/subtopics/{subtopicId}/complete")
     public ResponseEntity<SubtopicProgressResponseDto> markSubtopicComplete(@AuthenticationPrincipal Jwt jwt, @PathVariable String subtopicId) throws NotEnrolledException, ResourceNotFoundException {
         return ResponseEntity
