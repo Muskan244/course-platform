@@ -10,8 +10,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +34,7 @@ public class EnrollmentController {
                 content = @Content(schema = @Schema(implementation = EnrollmentResponseDto.class)))
     })
     @PostMapping("/{courseId}/enroll")
+    @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<EnrollmentResponseDto> enrollUser(@AuthenticationPrincipal Jwt jwt, @PathVariable String courseId) throws ResourceNotFoundException {
         return ResponseEntity
                 .status(HttpStatus.CREATED)

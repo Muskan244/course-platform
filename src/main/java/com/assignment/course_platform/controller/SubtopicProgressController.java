@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.constraints.Positive;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,7 @@ public class SubtopicProgressController {
                     content = @Content(schema = @Schema(implementation = SubtopicProgressResponseDto.class)))
     })
     @PostMapping("/subtopics/{subtopicId}/complete")
+    @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<SubtopicProgressResponseDto> markSubtopicComplete(@AuthenticationPrincipal Jwt jwt, @PathVariable String subtopicId) throws NotEnrolledException, ResourceNotFoundException {
         return ResponseEntity
                 .status(HttpStatus.CREATED)

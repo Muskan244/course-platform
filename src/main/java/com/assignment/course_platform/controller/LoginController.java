@@ -2,6 +2,7 @@ package com.assignment.course_platform.controller;
 
 import com.assignment.course_platform.dto.requests.LoginRequestDto;
 import com.assignment.course_platform.dto.responses.LoginResponseDto;
+import com.assignment.course_platform.exception.ResourceNotFoundException;
 import com.assignment.course_platform.service.LoginService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody final LoginRequestDto loginRequestDto) {
+    public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody final LoginRequestDto loginRequestDto) throws ResourceNotFoundException {
         return ResponseEntity.ok(
                 loginService.login(loginRequestDto)
         );

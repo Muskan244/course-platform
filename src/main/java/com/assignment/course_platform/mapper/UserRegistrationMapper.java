@@ -13,6 +13,7 @@ public class UserRegistrationMapper {
 
         user.setEmail(registrationRequestDto.email());
         user.setPassword(registrationRequestDto.password());
+        user.setRole(registrationRequestDto.role());
 
         return user;
     }

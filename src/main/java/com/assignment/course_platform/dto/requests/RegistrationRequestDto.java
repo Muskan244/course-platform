@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 public record RegistrationRequestDto(
         @Email
         String email,
-        String password) {
+        String password,
+        String role) {
 
 }
